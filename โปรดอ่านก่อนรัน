@@ -1,0 +1,58 @@
+1.POST /movies/{movie_id}/reviews (สร้างรีวิวสำหรับภาพยนตร์):
+
+สิ่งที่จะทำ: เพิ่มรีวิวสำหรับภาพยนตร์เรื่องใดเรื่องหนึ่ง
+
+สิ่งที่ต้องใส่: {movie_id} (ใน URL), และ reviewerName, rating (1-5), comment (ใน Body)
+
+คำสั่ง:
+
+curl -X POST -H "Content-Type: application/json" -d '{
+    "reviewerName": "Alice",
+    "rating": 5,
+    "comment": "An absolute masterpiece!"
+}' http://localhost:8080/movies/YOUR_MOVIE_ID_HERE/reviews
+หลังจากรันคำสั่งนี้ คุณจะได้ JSON response ที่มี ID ของรีวิวที่คุณเพิ่งสร้างไป (เช่น "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx") ให้จด ID นั้นไว้เพื่อใช้ในคำสั่งถัดไป
+
+2.GET /movies/{movie_id}/reviews (ดึงรีวิวทั้งหมดของภาพยนตร์):
+
+สิ่งที่จะทำ: ดึงรีวิวทั้งหมดสำหรับภาพยนตร์เรื่องใดเรื่องหนึ่ง
+
+สิ่งที่ต้องใส่: {movie_id}
+
+คำสั่ง:
+
+curl http://localhost:8080/movies/YOUR_MOVIE_ID_HERE/reviews
+
+3.GET /movies/{movie_id}/reviews/{review_id} (ดึงรีวิวเฉพาะ):
+
+สิ่งที่จะทำ: ดึงข้อมูลรีวิวเฉพาะโดยใช้ ID ของรีวิว และ ID ของภาพยนตร์
+
+สิ่งที่ต้องใส่: {movie_id} และ {review_id}
+
+คำสั่ง:
+
+curl http://localhost:8080/movies/YOUR_MOVIE_ID_HERE/reviews/YOUR_REVIEW_ID_HERE
+
+4.PUT /movies/{movie_id}/reviews/{review_id} (อัปเดตรีวิว):
+
+สิ่งที่จะทำ: อัปเดตข้อมูลรีวิวที่มีอยู่
+
+สิ่งที่ต้องใส่: {movie_id} และ {review_id} (ใน URL), และ reviewerName, rating, comment (ใน Body)
+
+คำสั่ง:
+
+curl -X PUT -H "Content-Type: application/json" -d '{
+    "reviewerName": "Alice Wonderland",
+    "rating": 4,
+    "comment": "Still great, but not quite a 5"
+}' http://localhost:8080/movies/YOUR_MOVIE_ID_HERE/reviews/YOUR_REVIEW_ID_HERE
+
+5.DELETE /movies/{movie_id}/reviews/{review_id} (ลบรีวิว):
+
+สิ่งที่จะทำ: ลบรีวิวออกจากระบบ
+
+สิ่งที่ต้องใส่: {movie_id} และ {review_id}
+
+คำสั่ง:
+
+curl -X DELETE http://localhost:8080/movies/YOUR_MOVIE_ID_HERE/reviews/YOUR_REVIEW_ID_HERE
